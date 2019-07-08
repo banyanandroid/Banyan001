@@ -9,12 +9,15 @@ public class AppConfig {
 
     static String url_login = base_url + "login";
 
+    static String url_shop_list = base_url + "shop_list";
+
+    static String url_distributor_list = base_url + "distributor_lists";
+    static String url_stockist_list = base_url + "stokist_list";
+    static String url_add_distributor = base_url + "add_distributor";
 
 
 
     static String url_dis_login = base_url + "distributor_login";
-
-    static String url_shop_list = base_url + "shop_list";
     static String url_up_shop_visit = base_url + "shopvisit";
     static String url_all_shop_list = base_url + "other_shop_list";
     static String url_state_list = base_url + "state_list";
@@ -23,9 +26,9 @@ public class AppConfig {
     static String url_dis_search_shop = base_url + "search_shop";
     static String url_dis_edit_shop = base_url + "update_shop";
 
-    static String url_dis_check_list = base_url + "check_status";
-    static String url_dis_prod_near_by_shop = base_url + "nearby_shop";
+
     static String url_dis_prod_shop = base_url + "shop_list";
+
     static String url_dis_prod_group = base_url + "productgrouplist";
     static String url_dis_prod_details = base_url + "productlist";
     static String url_dis_offline_prod_details = base_url + "getdistributorprice";

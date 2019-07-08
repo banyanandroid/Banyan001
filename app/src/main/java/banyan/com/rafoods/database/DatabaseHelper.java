@@ -110,6 +110,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     /****************************
+     * // Table Name Stockist
+     * **************************/
+
+    public static final String TABLE_STOCKIST = "stockist";
+    // Table columns
+    public static final String STOCKISTT_ID = "stock_id";
+    public static final String STOCKIST_ID = "stockist_id";
+    public static final String STOCKIST_NAME = "stockist_name";
+
+    // Creating table query
+    private static final String CREATE_TABLE_STOCKIST = "create table " + TABLE_STOCKIST + "("
+            + STOCKISTT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + STOCKIST_ID + " TEXT NOT NULL, " +
+            STOCKIST_NAME + " TEXT NOT NULL );";
+
+    /****************************
+     * // Table Name : ADD Distributor
+     * ******************************/
+
+    public static final String TABLE_DISTRIBUTOR = "distributor";
+    // Table columns
+    public static final String DISTRIBUTOR_ID = "dis_id";
+    public static final String DISTRIBUTOR_USER_ID = "user_id";
+    public static final String DISTRIBUTOR_STOCK_ID = "stockist_id";
+    public static final String DISTRIBUTOR_NAME = "distributor_name";
+    public static final String DISTRIBUTOR_ADD1 = "address1";
+    public static final String DISTRIBUTOR_ADD2 = "address2";
+    public static final String DISTRIBUTOR_CITY = "city";
+    public static final String DISTRIBUTOR_EMAIL = "distributor_email";
+    public static final String DISTRIBUTOR_PHONE = "distributor_mobile";
+
+    // Creating table query
+    private static final String CREATE_TABLE_DISTRIBUTOR = "create table " + TABLE_DISTRIBUTOR + "("
+            + DISTRIBUTOR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            DISTRIBUTOR_USER_ID + " TEXT NOT NULL, " +
+            DISTRIBUTOR_STOCK_ID + " TEXT NOT NULL, " +
+            DISTRIBUTOR_NAME + " TEXT NOT NULL, " +
+            DISTRIBUTOR_ADD1 + " TEXT NOT NULL, " +
+            DISTRIBUTOR_ADD2 + " TEXT NOT NULL, " +
+            DISTRIBUTOR_CITY + " TEXT NOT NULL, " +
+            DISTRIBUTOR_EMAIL + " TEXT NOT NULL, " +
+            DISTRIBUTOR_PHONE + " TEXT NOT NULL);";
+
+    /****************************
      * // Table Name Agency Name
      * **************************/
 
@@ -255,6 +299,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         System.out.println("### CREATE_TABLE_ENQUIRY : " + CREATE_TABLE_ENQUIRY);
         db.execSQL(CREATE_TABLE_ENQUIRY);
 
+        System.out.println("### CREATE_TABLE_STOCKIST : " + CREATE_TABLE_STOCKIST);
+        db.execSQL(CREATE_TABLE_STOCKIST);
+
+        System.out.println("### CREATE_TABLE_DISTRIBUTOR : " + CREATE_TABLE_DISTRIBUTOR);
+        db.execSQL(CREATE_TABLE_DISTRIBUTOR);
+
         System.out.println("### CREATE_TABLE_AGENCY : " + CREATE_TABLE_AGENCY);
         db.execSQL(CREATE_TABLE_AGENCY);
 
@@ -291,6 +341,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         System.out.println("### DROP TABLE IF EXISTS " + TABLE_ENQUIRY);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ENQUIRY);
         onCreate(db);
+
+        System.out.println("### DROP TABLE IF EXISTS " + TABLE_STOCKIST);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STOCKIST);
+        onCreate(db);
+
+        System.out.println("### DROP TABLE IF EXISTS " + TABLE_DISTRIBUTOR);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DISTRIBUTOR);
+        onCreate(db);
+
+
 
         System.out.println("### DROP TABLE IF EXISTS " + TABLE_AGENCY);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_AGENCY);

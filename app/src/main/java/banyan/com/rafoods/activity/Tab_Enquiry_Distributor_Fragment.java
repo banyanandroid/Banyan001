@@ -41,6 +41,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import banyan.com.rafoods.R;
+import banyan.com.rafoods.adapter.Distributor_Adapter;
 import banyan.com.rafoods.adapter.Enquiry_Adapter;
 import banyan.com.rafoods.global.SessionManager;
 import dmax.dialog.SpotsDialog;
@@ -50,7 +51,7 @@ import pugman.com.simplelocationgetter.SimpleLocationGetter;
 /**
  * Created by Jo on 05/03/2018.
  */
-public class    Tab_Enquiry_Shop_Fragment extends Fragment implements SheetLayout.OnFabAnimationEndListener,
+public class Tab_Enquiry_Distributor_Fragment extends Fragment implements SheetLayout.OnFabAnimationEndListener,
         SwipeRefreshLayout.OnRefreshListener, SimpleLocationGetter.OnLocationGetListener {
 
     SheetLayout mSheetLayout;
@@ -68,33 +69,27 @@ public class    Tab_Enquiry_Shop_Fragment extends Fragment implements SheetLayou
     private ListView List;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    public static final String TAG_SHOP_ID = "shop_id";
+    public static final String TAG_DISTIR_ID = "distributor_id";
     public static final String TAG_STOCKIST_ID = "stockist_id";
-    public static final String TAG_DISTRIBUTOR_ID = "distributor_id";
-    public static final String TAG_SHOP_NAME = "shop_name";
-    public static final String TAG_SHOP_OWNER_NAME = "shop_owner_name";
-    public static final String TAG_SHOP_LANDLINE = "landline";
-    public static final String TAG_SHOP_CONTACT = "shop_contact";
-    public static final String TAG_SHOP_TYPE = "shop_type";
-    public static final String TAG_SHOP_STATE = "state";
-    public static final String TAG_SHOP_PHOTOS = "shop_images";
-
-    public static final String TAG_AGENCY_NAME = "agencies_name";
-    public static final String TAG_SHOP_LOCATION = "location";
-    public static final String TAG_SHOP_PRECIOUS = "shop_previous";
-    public static final String TAG_REMARK = "remarks";
+    public static final String TAG_STOCKIST_NAME = "stockist_name";
+    public static final String TAG_DISTRIBUTOR_CODE = "distributor_code";
+    public static final String TAG_DISTRIBUTOR_NAME = "distributor_name";
+    public static final String TAG_ADDRESS1 = "address1";
+    public static final String TAG_ADDRESS2 = "address2";
+    public static final String TAG_CITY = "city";
+    public static final String TAG_DITRIBUTOR_EMAIL = "distributor_email";
+    public static final String TAG_DISTRIBUTOR_MOBILE = "distributor_mobile";
 
     static ArrayList<HashMap<String, String>> complaint_list;
 
     HashMap<String, String> params = new HashMap<String, String>();
 
-    public Enquiry_Adapter adapter;
+    public Distributor_Adapter adapter;
 
     String str_select_task_id;
 
     private static final int REQUEST_CODE = 1;
     String str_user_name, str_user_id, str_user_role, str_user_type;
-    String str_long_shop_id = "";
 
     String str_final_shop_url = "";
 
@@ -104,7 +99,7 @@ public class    Tab_Enquiry_Shop_Fragment extends Fragment implements SheetLayou
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootview = inflater.inflate(R.layout.tab_new_enquiry_layout, null);
+        View rootview = inflater.inflate(R.layout.tab_new_distributor_layout, null);
 
         // ButterKnife.bind(getActivity());
 
@@ -165,37 +160,33 @@ public class    Tab_Enquiry_Shop_Fragment extends Fragment implements SheetLayou
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                String shop_id = complaint_list.get(position).get(TAG_SHOP_ID);
-                String agencies_name = complaint_list.get(position).get(TAG_AGENCY_NAME);
-                String shop_name = complaint_list.get(position).get(TAG_SHOP_NAME);
-                String shop_owner_name = complaint_list.get(position).get(TAG_SHOP_OWNER_NAME);
-                String shop_contact = complaint_list.get(position).get(TAG_SHOP_CONTACT);
-                String shop_landline = complaint_list.get(position).get(TAG_SHOP_LANDLINE);
-                String shop_location = complaint_list.get(position).get(TAG_SHOP_LOCATION);
-                String shop_photos = complaint_list.get(position).get(TAG_SHOP_PHOTOS);
-                String shop_previous = complaint_list.get(position).get(TAG_SHOP_PRECIOUS);
-                String shop_type = complaint_list.get(position).get(TAG_SHOP_TYPE);
-                String shop_state = complaint_list.get(position).get(TAG_SHOP_STATE);
-                String remark = complaint_list.get(position).get(TAG_REMARK);
+                String dis_id = complaint_list.get(position).get(TAG_DISTIR_ID);
+                String stock_id = complaint_list.get(position).get(TAG_STOCKIST_ID);
+                String stock_name = complaint_list.get(position).get(TAG_STOCKIST_NAME);
+                String dis_code = complaint_list.get(position).get(TAG_DISTRIBUTOR_CODE);
+                String dis_name = complaint_list.get(position).get(TAG_DISTRIBUTOR_NAME);
+                String add1 = complaint_list.get(position).get(TAG_ADDRESS1);
+                String add2 = complaint_list.get(position).get(TAG_ADDRESS2);
+                String city = complaint_list.get(position).get(TAG_CITY);
+                String email = complaint_list.get(position).get(TAG_DITRIBUTOR_EMAIL);
+                String mobile = complaint_list.get(position).get(TAG_DISTRIBUTOR_MOBILE);
 
-                System.out.println("STATE :: " + shop_state);
+                System.out.println("STATE :: " + city);
 
                 SharedPreferences sharedPreferences = PreferenceManager
                         .getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                editor.putString("shop_id", shop_id);
-                editor.putString("agencies_name", agencies_name);
-                editor.putString("shop_name", shop_name);
-                editor.putString("shop_owner_name", shop_owner_name);
-                editor.putString("shop_contact", shop_contact);
-                editor.putString("shop_landline", shop_landline);
-                editor.putString("shop_location", shop_location);
-                editor.putString("shop_photos", shop_photos);
-                editor.putString("shop_previous", shop_previous);
-                editor.putString("shop_type", shop_type);
-                editor.putString("shop_state", shop_state);
-                editor.putString("remark", remark);
+                editor.putString("dis_id", dis_id);
+                editor.putString("stock_id", stock_id);
+                editor.putString("stock_name", stock_name);
+                editor.putString("dis_code", dis_code);
+                editor.putString("dis_name", dis_name);
+                editor.putString("add1", add1);
+                editor.putString("add2", add2);
+                editor.putString("city", city);
+                editor.putString("email", email);
+                editor.putString("mobile", mobile);
 
                 editor.commit();
 
@@ -228,16 +219,6 @@ public class    Tab_Enquiry_Shop_Fragment extends Fragment implements SheetLayou
         str_lat = String.valueOf(latitude);
         str_long = String.valueOf(longitude);
 
-        try {
-            System.out.println("LATT :: " + str_lat);
-            System.out.println("LONGG :: " + str_long);
-            dialog1 = new SpotsDialog(getActivity());
-            dialog1.show();
-            queue = Volley.newRequestQueue(getActivity());
-            Update_Visiting();
-        } catch (Exception e) {
-
-        }
     }
 
     @Override
@@ -263,7 +244,7 @@ public class    Tab_Enquiry_Shop_Fragment extends Fragment implements SheetLayou
 
     @Override
     public void onFabAnimationEnd() {
-        Intent intent = new Intent(getActivity(), Activity_Add_Enquiry.class);
+        Intent intent = new Intent(getActivity(), Activity_Add_Distributor.class);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
@@ -284,10 +265,10 @@ public class    Tab_Enquiry_Shop_Fragment extends Fragment implements SheetLayou
 
         String tag_json_obj = "json_obj_req";
 
-        System.out.println("CAME DA Enquiry" + AppConfig.url_shop_list);
+        System.out.println("CAME DA Enquiry" + AppConfig.url_distributor_list);
 
         StringRequest request = new StringRequest(Request.Method.POST,
-                AppConfig.url_shop_list, new Response.Listener<String>() {
+                AppConfig.url_distributor_list, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -305,37 +286,41 @@ public class    Tab_Enquiry_Shop_Fragment extends Fragment implements SheetLayou
                         for (int i = 0; arr.length() > i; i++) {
                             JSONObject obj1 = arr.getJSONObject(i);
 
-                            String shop_id = obj1.getString(TAG_SHOP_ID);
+                            String distributor_id = obj1.getString(TAG_DISTIR_ID);
                             String stockist_id = obj1.getString(TAG_STOCKIST_ID);
-                            String distributors_id = obj1.getString(TAG_DISTRIBUTOR_ID);
-                            String shop_name = obj1.getString(TAG_SHOP_NAME);
-                            String shop_owner_name = obj1.getString(TAG_SHOP_OWNER_NAME);
-                            String shop_landline = obj1.getString(TAG_SHOP_LANDLINE);
-                            String shop_contact = obj1.getString(TAG_SHOP_CONTACT);
-                            String shop_type = obj1.getString(TAG_SHOP_TYPE);
-                            String shop_images = obj1.getString(TAG_SHOP_PHOTOS);
+                            String stockist_name = obj1.getString(TAG_STOCKIST_NAME);
+                            String distributor_code = obj1.getString(TAG_DISTRIBUTOR_CODE);
+                            String distributor_name = obj1.getString(TAG_DISTRIBUTOR_NAME);
+                            String address1 = obj1.getString(TAG_ADDRESS1);
+                            String address2 = obj1.getString(TAG_ADDRESS2);
+                            String city = obj1.getString(TAG_CITY);
+                            String distributor_email = obj1.getString(TAG_DITRIBUTOR_EMAIL);
+                            String distributor_mobile = obj1.getString(TAG_DISTRIBUTOR_MOBILE);
 
                             // creating new HashMap
                             HashMap<String, String> map = new HashMap<String, String>();
 
                             // adding each child node to HashMap key => value
-                            map.put(TAG_SHOP_ID, shop_id);
+                            map.put(TAG_DISTIR_ID, distributor_id);
                             map.put(TAG_STOCKIST_ID, stockist_id);
-                            map.put(TAG_DISTRIBUTOR_ID, distributors_id);
-                            map.put(TAG_SHOP_NAME, shop_name);
-                            map.put(TAG_SHOP_OWNER_NAME, shop_owner_name);
-                            map.put(TAG_SHOP_LANDLINE, shop_landline);
-                            map.put(TAG_SHOP_CONTACT, shop_contact);
-                            map.put(TAG_SHOP_TYPE, shop_type);
-                            map.put(TAG_SHOP_PHOTOS, shop_images);
+                            map.put(TAG_STOCKIST_NAME, stockist_name);
+                            map.put(TAG_DISTRIBUTOR_CODE, distributor_code);
+                            map.put(TAG_DISTRIBUTOR_NAME, distributor_name);
+                            map.put(TAG_ADDRESS1, address1);
+                            map.put(TAG_ADDRESS2, address2);
+                            map.put(TAG_CITY, city);
+                            map.put(TAG_DITRIBUTOR_EMAIL, distributor_email);
+                            map.put(TAG_DISTRIBUTOR_MOBILE, distributor_mobile);
 
                             complaint_list.add(map);
 
-                            adapter = new Enquiry_Adapter(getActivity(),
+                            adapter = new Distributor_Adapter(getActivity(),
                                     complaint_list);
                             List.setAdapter(adapter);
 
                         }
+
+                        System.out.println("TESTTT ::"  + complaint_list);
 
                     } else if (success == 0) {
 
@@ -378,93 +363,5 @@ public class    Tab_Enquiry_Shop_Fragment extends Fragment implements SheetLayou
         // Adding request to request queue
         queue.add(request);
     }
-
-    /*****************************
-     * Update Visiting
-     ***************/
-
-    public void Update_Visiting() {
-
-        String tag_json_obj = "json_obj_req";
-
-        System.out.println("CAME DA Enquiry" + AppConfig.url_up_shop_visit);
-
-        StringRequest request = new StringRequest(Request.Method.POST,
-                AppConfig.url_up_shop_visit, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, response.toString());
-                try {
-                    JSONObject obj = new JSONObject(response);
-                    int success = obj.getInt("status");
-                    String message = obj.getString("message");
-
-                    if (success == 1) {
-                        TastyToast.makeText(getActivity(), "Visit Updated", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-
-                    } else if (success == 0) {
-
-                        TastyToast.makeText(getActivity(), "Visit Not Updated", TastyToast.LENGTH_LONG, TastyToast.ERROR);
-
-                    }
-                    dialog1.dismiss();
-                } catch (JSONException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    dialog1.dismiss();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                dialog1.dismiss();
-
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("user_id", str_user_id);
-                params.put("user_type", str_user_type);
-                params.put("user_role", str_user_role);
-                params.put("latitude", str_lat);
-                params.put("logitude", str_long);
-                params.put("shop_id", str_long_shop_id);
-
-                System.out.println("ENQUIRY ID : " + str_user_id);
-                System.out.println("ENQUIRY TYPE : " + str_user_type);
-                System.out.println("ENQUIRY USER : " + str_user_role);
-                System.out.println("ENQUIRY LAT : " + str_lat);
-                System.out.println("ENQUIRY LONG : " + str_long);
-                System.out.println("SHOP ID : " + str_long_shop_id);
-
-                return checkParams(params);
-            }
-
-            private Map<String, String> checkParams(Map<String, String> map) {
-                Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, String> pairs = (Map.Entry<String, String>) it.next();
-                    if (pairs.getValue() == null) {
-                        map.put(pairs.getKey(), "");
-                    }
-                }
-                return map;
-            }
-        };
-
-        int socketTimeout = 60000;//30 seconds - change to what you want
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        request.setRetryPolicy(policy);
-        // Adding request to request queue
-        queue.add(request);
-    }
-
 
 }

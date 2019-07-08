@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/windowBackground2"
+    android:background="@color/windowBackground"
     android:orientation="vertical">
 
     <include
@@ -96,7 +96,7 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -111,7 +111,7 @@
                             android:textColor="@color/textColordark"
                             android:textSize="16dp" />
 
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <Spinner
                         android:id="@+id/spn_ref_by"
@@ -193,7 +193,7 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -208,7 +208,7 @@
                             android:textColor="@color/textColordark"
                             android:textSize="16dp" />
 
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
                     <Spinner
@@ -435,7 +435,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="3"
                         android:scaleType="fitXY"
-                        android:src="@drawable/aapptalogo"/>
+                        android:src="@drawable/rafoods"/>
 
 
                 </LinearLayout>

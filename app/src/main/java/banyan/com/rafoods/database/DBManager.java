@@ -202,6 +202,81 @@ public class DBManager {
     }
 
     /*************************
+     *  STOCKIST
+     * ************************/
+
+    // order form
+    public long insert_stockist(String stockist_id, String stockist_name) {
+        System.out.println("### Insert Agency ");
+
+        ContentValues contentValue = new ContentValues();
+
+        contentValue.put(DatabaseHelper.STOCKIST_ID, stockist_id);
+        contentValue.put(DatabaseHelper.STOCKIST_NAME, stockist_name);
+
+        long response = database.insert(DatabaseHelper.TABLE_STOCKIST, null, contentValue);
+        System.out.println("### insert_Stockist : response " + response);
+        return response;
+    }
+
+    public Cursor Fetch_Stockist() {
+        System.out.println("### Fetch_Stockist");
+        String[] columns = new String[]{DatabaseHelper.STOCKIST_ID, DatabaseHelper.STOCKIST_NAME};
+
+        Cursor cursor = database.query(DatabaseHelper.TABLE_STOCKIST, columns, null, null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
+
+    public int delete_stockist() {
+        return database.delete(DatabaseHelper.TABLE_STOCKIST, null, null);
+    }
+
+
+    /*************************
+     *  DISTRIBUTER
+     * ************************/
+    public long insert_distributor(String user_id, String stockist_id, String distributor_name, String address1, String address2,
+                                   String city, String distributor_email, String distributor_mobile) {
+        System.out.println("### insert_distributor_Form ");
+
+        ContentValues contentValue = new ContentValues();
+
+        contentValue.put(DatabaseHelper.DISTRIBUTOR_USER_ID, user_id);
+        contentValue.put(DatabaseHelper.DISTRIBUTOR_STOCK_ID, stockist_id);
+        contentValue.put(DatabaseHelper.DISTRIBUTOR_NAME, distributor_name);
+        contentValue.put(DatabaseHelper.DISTRIBUTOR_ADD1, address1);
+        contentValue.put(DatabaseHelper.DISTRIBUTOR_ADD2, address2);
+        contentValue.put(DatabaseHelper.DISTRIBUTOR_CITY, city);
+        contentValue.put(DatabaseHelper.DISTRIBUTOR_EMAIL, distributor_email);
+        contentValue.put(DatabaseHelper.DISTRIBUTOR_PHONE, distributor_mobile);
+
+
+        long response = database.insert(DatabaseHelper.TABLE_DISTRIBUTOR, null, contentValue);
+        System.out.println("### insert_Add_Distributor : response " + response);
+        return response;
+    }
+
+    public Cursor Fetch_distributor() {
+        System.out.println("### Fetch_Stockist");
+        String[] columns = new String[]{DatabaseHelper.DISTRIBUTOR_USER_ID, DatabaseHelper.DISTRIBUTOR_STOCK_ID, DatabaseHelper.DISTRIBUTOR_NAME,
+                 DatabaseHelper.DISTRIBUTOR_ADD1, DatabaseHelper.DISTRIBUTOR_ADD2, DatabaseHelper.DISTRIBUTOR_CITY, DatabaseHelper.DISTRIBUTOR_EMAIL
+                , DatabaseHelper.DISTRIBUTOR_PHONE};
+
+        Cursor cursor = database.query(DatabaseHelper.TABLE_DISTRIBUTOR, columns, null, null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
+
+    public int delete_distributor() {
+        return database.delete(DatabaseHelper.TABLE_DISTRIBUTOR, null, null);
+    }
+
+    /*************************
      *  AGENCY NAME
      * ************************/
 

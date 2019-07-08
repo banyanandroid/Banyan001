@@ -54,7 +54,6 @@ public class Activity_Login extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
-    Spinner spn_user_type;
 
     EditText edt_user_email, edt_password;
 
@@ -81,36 +80,14 @@ public class Activity_Login extends AppCompatActivity {
         // Session Manager
         session = new SessionManager(getApplicationContext());
 
-        spn_user_type = (Spinner) findViewById(R.id.spn_login_type);
         edt_user_email = (EditText) findViewById(R.id.edt_username);
         edt_password = (EditText) findViewById(R.id.edt_password);
         btn_login = (Button) findViewById(R.id.btn_login);
-
-        spn_user_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-
-                str_login_user_type = parent.getItemAtPosition(pos).toString();
-
-                System.out.println("### str_user_type : " + str_login_user_type);
-
-                Log.e("TEST LOG : ", "LOG" + str_login_user_type );
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                //Another interface callback
-            }
-
-        });
 
         btn_login.setOnClickListener(new Button.OnClickListener() {
 
             public void onClick(View v) {
 
-                str_login_user_type = spn_user_type.getSelectedItem().toString();
                 str_user_email = edt_user_email.getText().toString();
                 str_password = edt_password.getText().toString();
 

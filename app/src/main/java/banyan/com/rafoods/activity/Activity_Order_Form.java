@@ -195,10 +195,8 @@ public class Activity_Order_Form extends AppCompatActivity implements SimpleLoca
         btn_add_to_cart = (ImageView) findViewById(R.id.order_btn_add_to_Cart);
         btn_submit = (Button) findViewById(R.id.order_btn_submit_order);
 
-        img_network_status = (ImageView) findViewById(R.id.order_img_status);
         img_info = (ImageView) findViewById(R.id.order_img_info);
 
-        txt_network_status = (TextView) findViewById(R.id.order_txt_status);
         txt_total = (TextView) findViewById(R.id.order_txt_total_amt);
         txt_marquee_offer = (TextView) this.findViewById(R.id.order_marquee_offer);
         txt_marquee_offer.setSelected(true);
@@ -823,7 +821,7 @@ public class Activity_Order_Form extends AppCompatActivity implements SimpleLoca
         String tag_json_obj = "json_obj_req";
         System.out.println("CAME 1");
         final StringRequest request = new StringRequest(Request.Method.POST,
-                AppConfig.url_dis_check_list, new Response.Listener<String>() {
+                AppConfig.base_url, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -1011,9 +1009,9 @@ public class Activity_Order_Form extends AppCompatActivity implements SimpleLoca
 
         String tag_json_obj = "json_obj_req";
         System.out.println("CAME 1");
-        System.out.println("### AppConfig.url_user_shop_list " + AppConfig.url_dis_prod_near_by_shop);
+        System.out.println("### AppConfig.url_user_shop_list " + AppConfig.base_url);
         final StringRequest request = new StringRequest(Request.Method.POST,
-                AppConfig.url_dis_prod_near_by_shop, new Response.Listener<String>() {
+                AppConfig.base_url, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {

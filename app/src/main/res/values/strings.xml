@@ -6,25 +6,31 @@
     <string name="drawer_close">Close</string>
 
 
+    <string name="nav_item_home">Home</string>
     <string name="nav_item_enquiry">Shop</string>
-    <string name="nav_item_order">Secondary Order</string>
-    <string name="nav_item_primary_order">Sales Return</string>
+    <string name="nav_item_distributor">Distributor</string>
+    <string name="nav_item_order">Order</string>
+    <string name="nav_item_closing_stock">Closing Stock</string>
     <string name="nav_item_my_order">My Target</string>
     <string name="nav_item_logout">Logout</string>
 
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_home</item>
         <item>@string/nav_item_enquiry</item>
+        <item>@string/nav_item_distributor</item>
         <item>@string/nav_item_order</item>
-        <item>@string/nav_item_primary_order</item>
+        <item>@string/nav_item_closing_stock</item>
         <item>@string/nav_item_my_order</item>
         <item>@string/nav_item_logout</item>
     </string-array>
 
+    <string name="title_home">Home</string>
     <string name="title_enquiry">Shop Info</string>
-    <string name="title_order">Secondary Order Form</string>
-    <string name="title_primary_order">Sales Return Form</string>
+    <string name="title_distributor">Distributor Info</string>
+    <string name="title_order">Order Form</string>
+    <string name="title_primary_order">Closing Stock</string>
     <string name="title_my_order">My Target</string>
     <string name="title_Logout">Logout</string>
 

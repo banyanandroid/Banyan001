@@ -31,7 +31,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
@@ -42,7 +49,12 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -154,14 +166,18 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
             if (value.equals("enquiry")) {
 
-                displayView(0);
+                displayView(1);
+
+            } else if (value.equals("distributor")) {
+
+                displayView(2);
 
             } else if (value.equals("order")) {
-                displayView(1);
-            } else if (value.equals("primaryorder")) {
-                displayView(2);
-            } else if (value.equals("Order Description")) {
                 displayView(3);
+            } else if (value.equals("primaryorder")) {
+                displayView(4);
+            } else if (value.equals("Order Description")) {
+                displayView(5);
             } else {
                 displayView(0);
             }
@@ -236,22 +252,30 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         String title = getString(R.string.app_name);
         switch (position) {
             case 0:
+                fragment = new Fragment_Home();
+                title = getString(R.string.title_home);
+                break;
+            case 1:
                 fragment = new Fragment_Enquiry();
                 title = getString(R.string.title_enquiry);
                 break;
-            case 1:
+            case 2:
+                fragment = new Fragment_Distributor();
+                title = getString(R.string.title_distributor);
+                break;
+            case 3:
                 fragment = new Fragment_Order();
                 title = getString(R.string.title_order);
                 break;
-            case 2:
+            case 4:
                 fragment = new Fragment_Primary_Order();
                 title = getString(R.string.title_primary_order);
                 break;
-            case 3:
+            case 5:
                 fragment = new Fragment_Target();
                 title = getString(R.string.title_my_order);
                 break;
-            case 4:
+            case 6:
                 stoptimertask();
                 Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
                 session.logoutUser();
@@ -277,7 +301,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         super.onResume();
 
         // Brgin Timer task
-        //startTimer();
+        startTimer();
          //MyApplication.getInstance().setConnectivityListener(this);
     }
 
@@ -484,14 +508,14 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         str_lat = String.valueOf(latitude);
         str_long = String.valueOf(longitude);
 
-       /* try {
+        try {
             System.out.println("LATT :: " + str_lat);
             System.out.println("LONGG :: " + str_long);
             queue = Volley.newRequestQueue(MainActivity.this);
             UpdateMyLocation();
         } catch (Exception e) {
 
-        }*/
+        }
     }
 
     @Override
@@ -600,6 +624,83 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             System.out.println("Inside GPS 1");
         }
     }
+
+
+
+    /********************************
+     * User Attendance Register
+     *********************************/
+
+    private void UpdateMyLocation() {
+
+        StringRequest request = new StringRequest(Request.Method.POST,
+                AppConfig.base_url, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, response.toString());
+                Log.d("USER_LOCATION", response.toString());
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    int success = obj.getInt("success");
+
+                    System.out.println("REG" + success);
+
+                    if (success == 1) {
+
+                        System.out.println("Going Finely");
+
+                    } else {
+                        System.out.println("Something Went Wrong");
+                    }
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("user_id", str_id);
+                params.put("lat", str_lat);
+                params.put("long", str_long);
+
+                System.out.println("user_id" + str_id);
+                System.out.println("str_lat" + str_lat);
+                System.out.println("str_long" + str_long);
+
+                return checkParams(params);
+            }
+
+            private Map<String, String> checkParams(Map<String, String> map) {
+                Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry<String, String> pairs = (Map.Entry<String, String>) it.next();
+                    if (pairs.getValue() == null) {
+                        map.put(pairs.getKey(), "");
+                    }
+                }
+                return map;
+            }
+        };
+
+        int socketTimeout = 60000;//30 seconds - change to what you want
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        request.setRetryPolicy(policy);
+        // Adding request to request queue
+        queue.add(request);
+    }
+
 
 
     @Override

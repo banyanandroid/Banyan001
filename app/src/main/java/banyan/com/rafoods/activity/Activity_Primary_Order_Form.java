@@ -597,7 +597,7 @@ public class Activity_Primary_Order_Form extends AppCompatActivity implements Si
         String tag_json_obj = "json_obj_req";
         System.out.println("CAME 1");
         final StringRequest request = new StringRequest(Request.Method.POST,
-                AppConfig.url_dis_check_list, new Response.Listener<String>() {
+                AppConfig.base_url, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -788,9 +788,9 @@ public class Activity_Primary_Order_Form extends AppCompatActivity implements Si
 
         String tag_json_obj = "json_obj_req";
         System.out.println("CAME 1");
-        System.out.println("### AppConfig.url_user_shop_list " + AppConfig.url_dis_prod_near_by_shop);
+        System.out.println("### AppConfig.url_user_shop_list " + AppConfig.base_url);
         final StringRequest request = new StringRequest(Request.Method.POST,
-                AppConfig.url_dis_prod_near_by_shop, new Response.Listener<String>() {
+                AppConfig.base_url, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
