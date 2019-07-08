@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="2">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/bill_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:text="201622"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/bill_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:text="2016-09-22"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/total_amt"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:text="Total Amt"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/paid_amt"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_weight="0.4"
+        android:gravity="center"
+        android:text="Paid Amt"
+        android:textColor="@color/color_green"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/balance_amt"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:text="Balance"
+        android:textColor="@color/color_red"
+        android:textSize="14sp" />
+
+
+</LinearLayout>
